@@ -1,0 +1,7 @@
+services:
+  ubuntu:
+    image: aoc2024
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./src:/code
