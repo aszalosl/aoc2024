@@ -1,0 +1,39 @@
+# Possibly the most concise implementation ever!
+# 
+# Parens change color everytime the screen is redrawn,
+# which happens on almost every key stroke! Totally not
+# distracting!
+#
+# INSTALL - add to '~/.pil/viprc' 
+
+(de RAINBOW . (31 32 33 34 35 36 91 92 93 94 95 96))
+
+(de random (L)
+  (car (nth L (rand 1 (length L)))) )
+
+(de addLine (Y L N)
+   (cup (+ (: top) Y) 1)
+   (clreol)
+   (for C (nth L (: winX))
+      (T (lt0 (dec 'N)))
+      (cond
+         ((: buffer flat))
+         ((=T (val C))
+            (ifn (>= "^_" C "^A")
+               (attr NIL T)
+               (setq C (char (+ 64 (char C))))
+               (attr RED T) ) )
+         ((>= "^_" C "^A")
+            (setq C (char (+ 64 (char C))))
+            (attr RED) )
+         ((gt0 (val C))
+            (attr CYAN) )
+         ### CHANGES
+         ((member C '("(" ")" "[" "]"))  # RAINBOW PARENS!!!
+            (attr (random RAINBOW)) )
+         ### END CHANGES
+         ((= C "\"")
+            (attr ULINE) )
+         (T (attr)) )
+      (prin C) )
+   (attr) )

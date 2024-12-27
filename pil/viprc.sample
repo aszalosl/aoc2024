@@ -1,0 +1,89 @@
+# 05mar23 Software Lab. Alexander Burger
+# Copy to ~/.pil/viprc
+
+(map+q "d" ":bd\r")
+
+## If you prefer LEFT and RIGHT to move the cursor:
+## (map+ "\e[D" "h")
+## (map+ "\e[C" "l")
+
+(cmd "pb1n" (L Lst Cnt)  # Pastebin
+   (pipe
+      (out '("curl" "-F" "f=@-;" "pb1n.de")
+         (mapc prinl (: buffer text)) )
+      (prCmd (rdLines)) ) )
+
+(cmd "ix.io" (L Lst Cnt)
+   (pipe
+      (out '("curl" "-sF" "f:1=<-" "ix.io")
+         (mapc prinl (: buffer text)) )
+      (prCmd (rdLines)) ) )
+
+(cmd "tabs" (L Lst Cnt)
+   (let N (or (format L) 3)
+      (=: buffer text
+         (mapcar
+            '((L)
+               (make
+                  (for (I . C) L
+                     (if (= "\t" C)
+                        (loop
+                           (link (name " "))
+                           (T (=0 (% I N)))
+                           (inc 'I) )
+                        (link C) ) ) ) )
+            (: buffer text) ) ) ) )
+
+(cmd "words" (L Lst Cnt)
+   (xchg 'delimNs
+      (quote
+         ((C)
+            (not
+               (sub? C
+                  "0123456789\
+                  ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+                  _\
+                  abcdefghijklmnopqrstuvwxyz" ) ) ) ) )
+   (prCmd
+      (list (chop (xchg '(" C") '(" Lisp")))) ) )
+
+(de *F7  # Find current definition
+   (let L (nth (: buffer text) (: posY))
+      (prCmd
+         (list
+            (loop
+               (NIL (setq L (prior L (: buffer text))))
+               (T (head '`(chop "(class ") (car L))
+                  (car L) )
+               (T (head '`(chop "(extend ") (car L))
+                  (car L) ) ) ) ) ) )
+
+(de *F8  # Expression size
+   (evCmd (size (s-expr))) )
+
+# Timestamp
+(local) vipDat
+
+(de vipDat (N)
+   (when (<> N (: posY))
+      (let (@L (get (: text) N)  @A)
+         (and
+            (match '(@A " " @L) @L)
+            (member @A '(("#") ("/" "/") ("/" "*")))
+            (>= 31 (format (cut 2 '@L)) 1)
+            (member (pack (cut 3 '@L)) *mon)
+            (format (cut 2 '@L))
+            (mapc set
+               (set (nth (: text) N)
+                  (conc
+                     @A
+                     (list (char 32))
+                     (chop (datSym (date)))
+                     @L ) )
+               1 ) ) ) ) )
+
+(daemon '(save> . +Buffer)
+   (or (vipDat 1) (vipDat 2) (vipDat 3)) )
+
+# Local
+(and (info ".viprc") (load ".viprc"))

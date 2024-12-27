@@ -30,9 +30,9 @@
 # s ha ezek közül egy is jó (or), akkor azt a sort is megszámoljuk.
 (de without (L X R C)
    (if R
-         (let C1 (append L R)
-            (without (append L (list X)) (car R) (cdr R) (cons C1 C)))
-     (cons L C)))
+      (let C1 (append L R)
+         (without (append L (list X)) (car R) (cdr R) (cons C1 C)))
+      (cons L C)))
 
 (de correct2 (Ls)
    (apply or (mapcar correct Ls)))

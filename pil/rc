@@ -1,0 +1,8 @@
+(history
+   (when (info "~/.pil/pilrc")  # Local history and commands
+      (make
+         (in @@
+            (while (line T) (link @)) ) ) ) )
+
+# Initial commands
+(push1 '*Bye '(out "~/.pil/pilrc" (mapc prinl (history))))

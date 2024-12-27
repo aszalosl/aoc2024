@@ -1,2 +1,8 @@
-# aoc2024
+# Aoc2024
 Solve Advent of Code in PicoLisp
+
+I am trying to solve this year's tasks in PicoLisp. This will be a strong challenge, since this language does not support vectors, matrices, even though a significant part of AoC tasks are based on it. Since I also want to support the very modest PicoLisp literature in Hungarian with the solutions, the comments in the program will be in Hungarian. I will also write my further comments in Hungarian.
+
+A [PicoLisp](https://picolisp.com/) már több mint egy évtizede a szemem elé került, olvasgattam is róla, de a különcsége miatt túl sok energiát nem fektettem bele, egy-két példaprogramon kívül mást nem futtatam le, saját programokat nem írtam. Aztán most november végén, mikor felmerült bennem, hogy jó lenne egy kicsit játszadozni az AoC feladataival, ugrott be a PicoLisp, mint egy számomra teljesen haszontalan nyelv, s valóban csak a játék kedvéért merülök el benne, viszont rendesen kikerülök a komfortzónámból.
+
+Ubuntu alatt próbálgattam valaha, de most a játszós gépem egy Macbook Air. Elvileg két módon is lehetne rá telepíteni a PicoLisp-et, de elsőre nem jött össze, így kerülő úton, konténerizációval oldom meg a helyzetet, azaz még egy botot dugok be a küllőim közé. Valamiért a konténerizált Ubuntu nem az igazi, hiába próbáltam a telepítésből kimaradt dokumentációs fájlokat telepíteni, azokat nem tudtam működésre bírni. Nem szép megoldás, hogy az ember egy konténerben kódol, ne is csinálja senki otthon, viszont nekem játszani megfelel. 

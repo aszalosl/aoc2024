@@ -8,7 +8,7 @@
 
 (de input (File)
    (in File
-	  (let Input (make (until (eof) (link (list (read) (read)))))
+      (let Input (make (until (eof) (link (list (read) (read)))))
          (setq *First (sort (mapcar car Input)))
          (setq *Second (sort (mapcar cadr Input)))  ) ) )
 
@@ -16,12 +16,12 @@
 # majd ezeket a számokat összegezni. Itt remekül használhatjuk azt, hogy a mapcar
 # nem csak egy listával képes dolgozni, hanem többel is.
 (de part1 ()
-    (let Result1 (apply + (mapcar '((X Y) (abs (- X Y))) *First *Second))
-       (prinl Result1)))
+   (let Result1 (apply + (mapcar '((X Y) (abs (- X Y))) *First *Second))
+      (prinl Result1)))
 
 # Part 2 ---------------------------------
 # Az egymást követő azonos tagok összevonása rég megoldott [probléma](https://picolisp.com/wiki/?99p09),
-ezért ezt csak ide másoljuk:
+# ezért ezt csak ide másoljuk:
 
 (de consecDups (Lst)
    (make

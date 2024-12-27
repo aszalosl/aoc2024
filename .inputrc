@@ -1,0 +1,7 @@
+set keyseq-timeout 40
+set blink-matching-paren on
+TAB: menu-complete
+C-y: menu-complete-backward
+set editing-mode vi
+set keymap vi-command
+v: ""
